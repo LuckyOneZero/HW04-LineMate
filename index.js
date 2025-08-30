@@ -69,7 +69,7 @@ async function handleEvent(event) {
       text: `✅ 訊息已儲存！\n收到內容：${messageText}`
     };
 
-    await client.replyToken(event.replyToken, replyMessage);
+    await client.replyMessage(event.replyToken, replyMessage);
     console.log(`Message saved and replied to user ${userId}`);
     
   } catch (error) {
@@ -82,7 +82,7 @@ async function handleEvent(event) {
     };
     
     try {
-      await client.replyToken(event.replyToken, errorMessage);
+      await client.replyMessage(event.replyToken, errorMessage);
     } catch (replyError) {
       console.error('Failed to send error reply:', replyError);
     }

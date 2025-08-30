@@ -60,8 +60,9 @@ class GoogleSheetsService {
 
       const request = {
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'Sheet1!A:C', // Assumes columns: Timestamp, User ID, Message
+        range: 'Sheet1', // Simplified range
         valueInputOption: 'RAW',
+        insertDataOption: 'INSERT_ROWS',
         resource: {
           values: values
         }
