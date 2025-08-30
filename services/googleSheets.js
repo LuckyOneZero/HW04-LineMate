@@ -48,19 +48,20 @@ class GoogleSheetsService {
     }
   }
 
-  async appendMessage(message, userId, timestamp) {
+  async appendMessage(messageType, message, userId, timestamp) {
     try {
       const values = [
         [
           new Date(timestamp).toISOString(),
           userId,
+          messageType,
           message
         ]
       ];
 
       const request = {
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'A:C',
+        range: 'A:D',
         valueInputOption: 'RAW',
         insertDataOption: 'INSERT_ROWS',
         resource: {
