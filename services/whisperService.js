@@ -33,14 +33,15 @@ class WhisperService {
 
   async downloadAudioFile(messageId, accessToken) {
     try {
-      const response = await axios({
-        method: 'get',
-        url: `https://api-data.line.me/v2/bot/message/${messageId}/content`,
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        },
-        responseType: 'stream'
-      });
+      const response = await axios.get(
+        `https://api-data.line.me/v2/bot/message/${messageId}/content`,
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          },
+          responseType: 'stream'
+        }
+      );
 
       // Generate unique filename
       const filename = `audio_${messageId}_${Date.now()}.m4a`;
