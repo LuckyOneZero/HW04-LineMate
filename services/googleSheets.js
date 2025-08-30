@@ -9,7 +9,26 @@ class GoogleSheetsService {
   async initialize() {
     try {
       // Parse the service account key from environment variable
-      const serviceAccountKey = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+      let serviceAccountKey;
+      const keyData = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+      
+      if (!keyData) {
+        throw new Error('GOOGLE_SERVICE_ACCOUNT_KEY environment variable is required');
+      }
+      
+      if (keyData.startsWith('{')) {
+        // Direct JSON string
+        serviceAccountKey = JSON.parse(keyData);
+      } else {
+        // Base64 encoded JSON
+        try {
+          const decodedKey = Buffer.from(keyData, 'base64').toString('utf-8');
+          serviceAccountKey = JSON.parse(decodedKey);
+        } catch (decodeError) {
+          console.error('Failed to decode base64 key:', decodeError);
+          throw new Error('Invalid base64 encoded service account key');
+        }
+      }
       
       // Create JWT auth client
       this.auth = new google.auth.JWT(
