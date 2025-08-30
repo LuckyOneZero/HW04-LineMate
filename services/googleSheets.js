@@ -60,7 +60,7 @@ class GoogleSheetsService {
 
       const request = {
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'Sheet1', // Simplified range
+        range: 'A:C',
         valueInputOption: 'RAW',
         insertDataOption: 'INSERT_ROWS',
         resource: {
