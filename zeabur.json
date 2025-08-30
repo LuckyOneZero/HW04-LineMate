@@ -1,0 +1,15 @@
+{
+  "name": "linemate-bot",
+  "services": [
+    {
+      "name": "linemate-bot",
+      "source": {
+        "type": "git"
+      },
+      "environment": {
+        "NODE_ENV": "production",
+        "PORT": "3000"
+      }
+    }
+  ]
+}
